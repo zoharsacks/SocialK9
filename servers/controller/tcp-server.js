@@ -1,6 +1,7 @@
 var net = require('net');
 var fs = require('fs');
 var buffer = require('buffer');
+var util = require('util');
 
 var server = net.createServer(function(conn) {
     console.log('server connected');
@@ -16,15 +17,15 @@ var server = net.createServer(function(conn) {
     })
 });
 
-var HOST = '127.0.0.1';
-var PORT = '7192'
+var PORT = '8080'
 var FILEPATH = '/tmp/geekcon/';
 
 var stream = undefined;
 
-server.listen(PORT, HOST, function() {
+server.listen(PORT, function() {
     //listening
     console.log('server bound to ' + PORT + '\n');
+    console.log('server stats ' + util.inspect(server.address()));
 
     server.on('connection', function(){
         console.log('connection made...\n')
