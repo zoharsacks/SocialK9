@@ -1,14 +1,15 @@
 var https = require('https'); //Https module of Node.js
 var fs = require('fs'); //FileSystem module of Node.js
 var FormData = require('form-data'); //Pretty multipart form maker.
-
-var ACCESS_TOKEN = "CAACEdEose0cBAFvFV9T1LobY88M57iXYUWBwQt5IImH7vvs4PxqXf1quHgdGUwsNiKml5Ob8ZAYk6xjCWM0M6jGuN3bR0LkkWWnsZClDju3MkJfOw38cTj49jv8I4F3q053VRB9zLPmi11e0aSTzhUehntaI1ncDI5X4g3FWKL98vWQtAsB6Tz6g6ZAgG4lQPOUZAZCcQ7JkOckbz4jpz";
+var Quotes = require('../facebook/quotes').getQuotes();
+var ACCESS_TOKEN = "CAACEdEose0cBAAyVsF9qrWZB5ge7mPvG5fF4aOPIOdflsCsKiVyQDc8iEcRRnhRCZAaAsxHlhsHZAW8BDVMbI3OwUZAWNQq1T1ov6ARmgZAyUd3eSdr2M9ldQXT8Ltq4NGdcV0tbwDiorv240qIohhVAsGlgiCyjIHsPdDvkiIOctpWgS7KLGgdv0tYKnLSwNnlRU9iSA5OqaomFSzDZBC1OXNueCBwZAMZD";
 
 
 exports.postImage = function(path){
     var form = new FormData(); //Create multipart form
+    var message = Quotes.quotes[Math.floor(Math.random() * Quotes.quotes.length)];
     form.append('file', fs.createReadStream(path)); //Put file
-    form.append('message', "SocialK9 many win"); //Put message
+    form.append('message', message); //Put message
 
 //POST request options, notice 'path' has access_token parameter
     var options = {
