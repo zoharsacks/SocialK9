@@ -2,10 +2,23 @@
  * Created by scancel on 18/09/14.
  */
 // Watch for changes on the images folder
-var watch = require('watch')
+var watch = require('watch'),
+    face_detect = require('../face-detect/face-detect'),
+    facebook = require('../facebook/facebook');
+
 function newFileHandler (f, stat) {
 	// Handle new files
-	console.log("new files");
+	console.log("new files added");
+    // Try to detect a face
+    face_detect.detect(f, function(faceDetected){
+        if(faceDetected){
+            console.log("face detected successfully");
+            facebook.postImage(f);
+        }
+        else{
+            console.log("face detection failed");
+        }
+    });
 }
 function changedFileHandler (f, curr, prev) {
 	// Handle file changes

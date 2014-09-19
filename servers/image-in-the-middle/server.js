@@ -12,7 +12,7 @@ var init = require('./config/init')(),
  * Please note that the order of loading is important.
  */
 
-var IMAGES_FOLDER_PATH = "/images";
+var IMAGES_FOLDER_PATH = "images";
 
 // Create the images directory watcher
 watcher.create(IMAGES_FOLDER_PATH);
